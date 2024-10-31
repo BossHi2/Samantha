@@ -69,9 +69,22 @@ a{
         grid-template-rows: repeat(var(--numOfCards), 15em);
     }
 }
+@media screen and (max-width: 500px){
+    .cardGrid{
+        grid-template-columns: 100vw;
+        grid-template-rows: repeat(round(up, calc(var(--numOfCards)/2), 1), 15em);
+        padding: 0px;
+    }
+    .cardGrid .left{
+        rotate: 0deg;
+    }
+    .cardGrid .right{
+        rotate: 0deg;
+    }
+}
 .card{
     background-size: cover;
-    background-color: white;
+    background-color: rgb(253, 253, 253);
     background-position-y: -30px;
     box-shadow: 0px 1px 10px rgb(134, 134, 134);
     padding: 20px;
@@ -84,11 +97,7 @@ a{
     transform: scale(1.05);
 }
 
-.AJRConcert{
-    background-image: linear-gradient(rgba(195, 195, 195, 0.5), rgba(195, 195, 195, 0.5)), 
-                        url("/assets/AJR Concert.jpeg");
-    background-position-y: -30px;
-}
+
 .left{
     rotate: 2deg;
 }
@@ -99,15 +108,42 @@ a{
 .articleTitle{
     font-size: 50px;
     margin-bottom: 0px;
+    position: relative;
 }
 .articleDate{
     font-size: 20px;
     margin-top: 5px;
+    position: relative;
+}
+.title{
+    height: max-content;
 }
 .content{
     padding-left: 20vw;
     padding-right: 20vw;
 }
+@media screen and (max-width:1200px){
+    .content{
+        padding-left: 10vw;
+        padding-right: 10vw;
+    }
+}
+@media screen and (max-width:800px){
+    .content{
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .content p{
+        padding-left: 3vw;
+        padding-right: 3vw;
+    }
+    blockquote{
+        margin-left: 0px;
+        margin-right: 0px;
+        border-radius: 0px;
+    }
+}
+
 .content p{
     word-wrap: break-word;
     line-height: 40px;
@@ -115,14 +151,17 @@ a{
     font-size: 20px;
 }
 .content img{
-    width: 60vw;
+    width: 100%; 
 }
+
 .content .verticalImage{
-    width: 30vw;
+    width: 50%;
     left: 50%;
+    min-width: 300px;
     position: relative;
     transform: translate(-50%, 0);
 }
+
 .content .caption{
     text-align: center;
     color: rgb(71, 71, 71);
@@ -144,14 +183,14 @@ a{
     -webkit-transform: rotate(135deg);
 
     position: relative;
-    left: 1vw;
+    left: 1em;
     top: 0;
 }
 .backArrow:hover{
     border: solid black;
     border-width: 0 4px 4px 0;
     display: inline-block;
-    padding: 4px;
+    padding: 5px;
     transform: rotate(135deg);
     -webkit-transform: rotate(135deg);
 
