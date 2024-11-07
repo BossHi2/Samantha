@@ -1,5 +1,6 @@
 :root{
     --numOfCards:4;
+    --cardBG: rgb(235, 228, 220);
 }
 
 html{
@@ -11,16 +12,6 @@ body{
     padding-bottom: 120px;
     background-color: #FAF9F6;
     overflow-x:hidden;
-
-    --dot-bg: #fdfcf3;
-    --dot-color: #dcdcd4;
-    --dot-size: 1.5px;
-    --dot-space: 22px;
-	background:
-		linear-gradient(90deg, var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
-		linear-gradient(var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
-		var(--dot-color);
-
 }
 a{
     all: unset;
@@ -84,7 +75,7 @@ a{
 }
 .card{
     background-size: cover;
-    background-color: rgb(253, 253, 253);
+    background-color: var(--cardBG);
     background-position-y: -30px;
     box-shadow: 0px 1px 10px rgb(134, 134, 134);
     padding: 20px;
@@ -208,4 +199,64 @@ blockquote{
     box-shadow: 0px 1px 10px rgb(227, 227, 227);
     margin-top: 50px;
     margin-bottom: 50px;
+}
+
+
+
+
+
+
+
+
+
+
+.quizInputWrapper{
+    width: 100vw;
+    height: max-content;
+}
+.quizInput{
+    left: 50%;
+    transform: translate(-50%, 0);
+    position: relative;
+    height: 30vh;
+    width: calc(30vw + 2em);
+
+    padding: 5px;
+}
+.quizInput:focus{
+    outline:none !important;
+}
+.generateQuiz{
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid black;
+    background-color: var(--cardBG);
+
+    position: relative;
+    top: 20px;
+    left: calc(50% - 60px);
+    
+
+    transition: 250ms;
+
+    font-size: 20px;
+}
+.buttonWrapper{
+    position: relative;
+    height: 63px;
+}
+.generateQuiz:hover{
+    cursor: pointer;
+    background-color: rgb(200, 193, 185);
+}
+.tenseSelectorWrapper{
+    background-color: var(--cardBG);
+    width: 30vw;
+    height: max-content;
+    padding: 1em;
+    border-radius: 10px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    margin-top: 5vh;
 }
