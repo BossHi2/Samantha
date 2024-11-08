@@ -14,7 +14,21 @@
     </div>
 
     <div class="quizInputWrapper">
-        <textarea class="quizInput" placeholder="Press enter between each word"></textarea>
+        <div class="verbInputWraper">
+
+
+            <div class="dropdownMenu">
+                <h3 style="background-color: #ffffff; margin: 0px; padding-top: 1em; padding-bottom: 1em;">Search from dictionary</h3>
+                <input type="text" placeholder="Search verb" class="quizInput" onkeyup="filter()">
+            </div>
+            
+
+           
+            <div class="selectedVerbsWrapper">
+                <h3 style="background-color: #ffffff; margin: 0px; padding-top: 1em; padding-bottom: 1em; border-bottom: 1px solid black;">Selected Verbs</h3>
+            </div>
+        </div>
+        
         <br>
         <div class="tenseSelectorWrapper">
             <h3>Select Tense(s) for this exercise</h3>

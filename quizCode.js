@@ -1,24 +1,50 @@
-const quizInput = document.getElementsByClassName("quizInput")[0];
 const presentCheckbox = document.getElementById("present");
 const imperfectCheckbox = document.getElementById("imperfect");
 
-word = [];
+word = {};
 tenses = {};
 
-window.addEventListener("click", e =>{
-    addButton()
-})
+dictionary = {}
 
-window.addEventListener("keyup", e =>{
-    addButton()
-})
+
+start()
+
+
+
+
+
+function start(){
+    fetch('./verbs.json')
+    .then(res => res.json())
+    .then(data =>{
+        dictionary = data
+        
+    })
+    window.addEventListener("click", e =>{
+        addButton()
+    })
+    const parent = document.getElementsByClassName("dropdownMenu")[0];
+    
+
+    setTimeout(function(){
+        const keys = Object.keys(dictionary)
+        for(i = 0; i<keys.length; i++){
+            var ul = document.createElement("ul")
+            var text = document.createTextNode(keys[i])
+            ul.appendChild(text)
+            ul.classList.add("verbSelect")
+
+            var onclickString = "selectVerb(document.getElementsByClassName('verbSelect')[" + i + "].innerText);"
+            ul.setAttribute("onclick", onclickString)
+            parent.appendChild(ul)
+        }
+    }, 125)
+
+}
 
 function addButton(){
-    let inputValue = quizInput.value;
-    inputValue = inputValue.replace(/\s/g, "");
-    inputValue = inputValue.replace("\n", "");
 
-    if((presentCheckbox.checked || imperfectCheckbox.checked) && (inputValue != "")){
+    if((presentCheckbox.checked || imperfectCheckbox.checked) && (Object.keys(word).length != 0)){
         if(document.getElementsByClassName("generateQuiz").length == 0){
             const quizInputWrapper = document.getElementsByClassName("buttonWrapper")[0];
             var button = document.createElement("a");
@@ -36,22 +62,51 @@ function addButton(){
 }
 
 function generate(){
-    temp = quizInput.value;
-    word = temp.split("\n");
-    for(i = 0; i<word.length; i++){
-        word[i] = word[i].trim();
-        if(word[i] == ""){
-            word.splice(i, 1)
-            i--
-        }
-    }
-
     tenses = {
         "present":presentCheckbox.checked, 
         "imperfect": imperfectCheckbox.checked,
-    }
-    console.log(word)
+    }    
+}
+function selectVerb(verb){
+    if(verb in word == false){
+        word[verb] = dictionary[verb]
+
+        const parent = document.getElementsByClassName("selectedVerbsWrapper")[0];
     
+        var ul = document.createElement("ul")
+        var text = document.createTextNode(verb)
+        ul.appendChild(text)
+        ul.classList.add("selectedVerbs")
+        var onclickString = "removeVerb(\"" + verb + "\");"
+        ul.setAttribute("onclick", onclickString)
+    
+        parent.appendChild(ul)
+    }
+}
+function removeVerb(verb){
+    delete word[verb]
+    var ul = document.getElementsByClassName("selectedVerbs");
+    for(i = 0; i<ul.length; i++){
+        if(ul[i].innerText == verb){
+            ul[i].remove();
+            break;
+        }
+            
+    }
 }
 
-//<button class="generateQuiz" onclick="generate()">Generate!</button>
+
+function filter(){
+    const input = document.getElementsByClassName("quizInput")[0]
+    const filter = input.value.toUpperCase();
+    const div = document.getElementsByClassName("dropdownMenu")[0]
+    const ul = div.getElementsByTagName("ul");
+    for (let i = 0; i < ul.length; i++) {
+        txtValue = ul[i].textContent || ul[i].innerText;
+        if (txtValue.toUpperCase().indexOf(filter) == 0) {
+            ul[i].style.display = "";
+        } else {
+            ul[i].style.display = "none";
+        }
+    }
+}
